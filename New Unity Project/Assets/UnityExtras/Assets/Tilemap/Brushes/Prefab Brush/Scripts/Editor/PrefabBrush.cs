@@ -17,7 +17,7 @@ namespace UnityEditor
 		public override void Paint(GridLayout grid, GameObject brushTarget, Vector3Int position)
 		{
 			// Do not allow editing palettes
-			if (brushTarget.layer == 31)
+			if (brushTarget == null || brushTarget.layer == 31)
 				return;
 
 			int index = Mathf.Clamp(Mathf.FloorToInt(GetPerlinValue(position, m_PerlinScale, k_PerlinOffset)*m_Prefabs.Length), 0, m_Prefabs.Length - 1);
