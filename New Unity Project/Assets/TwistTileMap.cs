@@ -17,10 +17,10 @@ public class TwistTileMap : MonoBehaviour
         if(firstTile)
         {
             Debug.Log(firstTile.name);
-            
-            Debug.Log(firstTile);
-        }
 
+            TwistTile tile = ((TwistTilePiece)firstTile).gameObject.GetComponent<TwistTile>();
+            Debug.Log(tile.Directions.ToString());
+        }
     }
 
     // Update is called once per frame

@@ -4,29 +4,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TwistTile : MonoBehaviour
+public class TwistTile : MonoBehaviour, IInteractable
 {
-    [Flags]
-    public enum TapDirections
-    {
-        North = 0 >> 1,
-        East =  1 >> 1,
-        South = 2 >> 1,
-        West =  3 >> 1
-    }
-    
-    Transform Graphic;
-
+    [EnumFlags]
     public TapDirections Directions;
 
-    // Start is called before the first frame update
-    void Start()
+    public Transform TileGraphic;
+
+    public TwistTile North;
+    public TwistTile East;
+    public TwistTile South;
+    public TwistTile West;
+
+    public void setDirections(TwistTile north, TwistTile east, TwistTile south, TwistTile west)
     {
+        North = north;
+        East = east;
+        South = south;
+        West = west;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Interact()
     {
-        
+
+    }
+
+    public void OnMouseDown()
+    {
+
+    }
+
+    public void OnMouseOver()
+    {
+        Debug.Log(Directions.ToString());
     }
 }
