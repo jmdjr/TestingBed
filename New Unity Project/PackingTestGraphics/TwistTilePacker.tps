@@ -88,9 +88,9 @@
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>2048</int>
+            <int>512</int>
             <key>height</key>
-            <int>2048</int>
+            <int>512</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -132,7 +132,7 @@
             <key>datafile</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename></filename>
+                <filename>../Assets/TileSet/TwistTileMap.tpsheet</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -169,7 +169,7 @@
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Polygon</enum>
+            <enum type="SpriteSettings::TrimMode">Crop</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -181,10 +181,22 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">E.png</key>
+            <key type="filename">EW.png</key>
+            <key type="filename">N.png</key>
             <key type="filename">NE.png</key>
+            <key type="filename">NES.png</key>
+            <key type="filename">NESW.png</key>
+            <key type="filename">NEW.png</key>
+            <key type="filename">NS.png</key>
+            <key type="filename">NSW.png</key>
             <key type="filename">NW.png</key>
+            <key type="filename">None.png</key>
+            <key type="filename">S.png</key>
             <key type="filename">SE.png</key>
             <key type="filename">SW.png</key>
+            <key type="filename">W.png</key>
+            <key type="filename">WES.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -204,6 +216,18 @@
             <filename>SE.png</filename>
             <filename>SW.png</filename>
             <filename>NE.png</filename>
+            <filename>NES.png</filename>
+            <filename>NESW.png</filename>
+            <filename>NEW.png</filename>
+            <filename>NSW.png</filename>
+            <filename>WES.png</filename>
+            <filename>NS.png</filename>
+            <filename>EW.png</filename>
+            <filename>None.png</filename>
+            <filename>N.png</filename>
+            <filename>S.png</filename>
+            <filename>W.png</filename>
+            <filename>E.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -14,15 +14,15 @@ public class TwistTile : MonoBehaviour
 
     public Vector3Int TilePosition;
     public ITilemap Tilemap;
-    public TwistTilePiece TilePiece;
+    private TwistTilePiece TilePiece;
 
     public Transform TileGraphic;
     public Text PositionText;
 
-    public TwistTile North = null;
-    public TwistTile East = null;
-    public TwistTile South = null;
-    public TwistTile West = null;
+    private TwistTile North = null;
+    private TwistTile East = null;
+    private TwistTile South = null;
+    private TwistTile West = null;
 
     private bool isRotating = false;
 
@@ -160,10 +160,10 @@ public class TwistTile : MonoBehaviour
         Rotate(1);
     }
 
-    public void OnMouseOver()
-    {
-        //Debug.Log(Directions.ToString());
-    }
+    //public void OnMouseOver()
+    //{
+    //    //Debug.Log(Directions.ToString());
+    //}
 
     private IEnumerator RotationAnimation(int degrees)
     {

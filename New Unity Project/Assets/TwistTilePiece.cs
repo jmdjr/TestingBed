@@ -11,7 +11,7 @@ public class TwistTilePiece : Tile
     //public TwistTilePiece South;
     //public TwistTilePiece West;
 
-    public TwistTile myTileObject;
+    //public TwistTile myTileObject;
     public Vector3Int myPosition;
 
     public override void RefreshTile(Vector3Int position, ITilemap tilemap)
@@ -46,7 +46,7 @@ public class TwistTilePiece : Tile
 
         if (go)
         {
-            myTileObject = go.GetComponent<TwistTile>();
+            var myTileObject = go.GetComponent<TwistTile>();
 
             if (myTileObject)
             {
