@@ -13,9 +13,9 @@ public class InteractionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0))
-        {
-            //IInteractable obj = Physics2D.Raycast(new Vector2())
-        }
+        //if(Input.GetMouseButton(0))
+        //{
+        //    //IInteractable obj = Physics2D.Raycast(new Vector2())
+        //}
     }
 }

@@ -1,0 +1,18 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:f4c144a771206a435f0e936aa329b136:6e263d648f83c99f86dcf28da1e65148:9226a6f91795a08a1de4225d67634997$
+#
+:format=40300
+:texture=TwistTileMap.png
+:size=128x128
+:pivotpoints=enabled
+:borders=disabled
+
+NE;1;79;48;48; 0.5;0.5; 0;0;0;0; 7;48;6;34;0;14;0;3;3;0;15;0;48;48;48; 5;4;5;6;1;4;6;2;3;4;1;2;4;0;1;6
+NW;1;29;48;48; 0.5;0.5; 0;0;0;0; 7;48;6;34;0;14;0;3;3;0;15;0;48;48;48; 5;4;5;6;1;4;6;2;3;4;1;2;4;0;1;6
+SE;51;79;48;48; 0.5;0.5; 0;0;0;0; 7;48;6;34;0;14;0;3;3;0;15;0;48;48;48; 5;4;5;6;1;4;6;2;3;4;1;2;4;0;1;6
+SW;51;29;48;48; 0.5;0.5; 0;0;0;0; 4;48;0;0;0;0;48;48;48; 2;1;2;3;0;1;3

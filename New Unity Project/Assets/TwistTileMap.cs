@@ -10,17 +10,16 @@ public class TwistTileMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        map = transform.GetComponent<Tilemap>();
-        Debug.Log(map.size);
-        TileBase firstTile = map.GetTile(Vector3Int.zero);
+        //map = transform.GetComponent<Tilemap>();
+        //Debug.Log(map.size);
+        //TileBase firstTile = map.GetTile(Vector3Int.zero);
 
-        if(firstTile)
-        {
-            Debug.Log(firstTile.name);
-
-            TwistTile tile = ((TwistTilePiece)firstTile).gameObject.GetComponent<TwistTile>();
-            Debug.Log(tile.Directions.ToString());
-        }
+        //if(firstTile)
+        //{
+        //    Debug.Log(firstTile.name);
+        //    TwistTile tile = ((TwistTilePiece)firstTile).gameObject.GetComponent<TwistTile>();
+        //    Debug.Log(tile.Directions.ToString());
+        //}
     }
 
     // Update is called once per frame

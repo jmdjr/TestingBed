@@ -19,7 +19,9 @@ public static class TapDirectionsHelper
         if (helper.HasFlag(TapDirections.West))  rotatedDirections |= TapDirections.South;
         if (helper.HasFlag(TapDirections.South)) rotatedDirections |= TapDirections.East;
 
-        return rotatedDirections;
+        helper = rotatedDirections;
+
+        return helper;
     }
 
     public static TapDirections RotateClockwise(this TapDirections helper)
@@ -31,7 +33,9 @@ public static class TapDirectionsHelper
         if (helper.HasFlag(TapDirections.South)) rotatedDirections |= TapDirections.West;
         if (helper.HasFlag(TapDirections.East))  rotatedDirections |= TapDirections.South;
 
-        return rotatedDirections;
+        helper = rotatedDirections;
+
+        return helper;
     }
 }
 

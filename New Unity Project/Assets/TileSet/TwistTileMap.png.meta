@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-guid: 07bc8b213a65fed428db02da4b7a1ae6
+guid: dc33894c556a06f4b933e0d10954ce58
 TextureImporter:
   fileIDToRecycleName:
-    21300000: TwistMap_0
-    21300002: TwistMap_1
-    21300004: TwistMap_2
-    21300006: TwistMap_3
+    21300000: TwistTileMap
+    21300002: NE
+    21300004: NW
+    21300006: SE
+    21300008: SW
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -35,7 +36,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -121,81 +122,81 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TwistMap_0
+      name: NE
       rect:
         serializedVersion: 2
-        x: 0
-        y: 48
+        x: 1
+        y: 79
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 047e585d18081cf43aab91db47dcce66
+      spriteID: 0c26729540e0af64aa6867944e010598
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TwistMap_1
+      name: NW
       rect:
         serializedVersion: 2
-        x: 48
-        y: 48
+        x: 1
+        y: 29
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c52d1f76155d7f749b65a0d33f4a6e9a
+      spriteID: d44981d7fb0f2ae4fb3b5b7e2733a797
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TwistMap_2
+      name: SE
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 51
+        y: 79
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: e34cf407f6db974479739f11e8f94a73
+      spriteID: 017bc90561a9f7a49bd4962c4802bbac
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TwistMap_3
+      name: SW
       rect:
         serializedVersion: 2
-        x: 48
-        y: 0
+        x: 51
+        y: 29
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: af12eb0570b4db54ea0a3a79604abb03
+      spriteID: 0d22a2c76beeaee4fb5b456475e6ca16
       vertices: []
       indices: 
       edges: []
@@ -203,7 +204,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2ca9313b06a3e5a4cbd27c61eedd77c9
+    spriteID: faf92b39153e9ca47876819991a1e8d3
     vertices: []
     indices: 
     edges: []
