@@ -1,41 +1,32 @@
 ﻿using System;
 [Flags]
-public enum TapDirections
+public enum TapDirections : uint
 {
-    North = 1 << 0,
-    East = 1 << 1,
-    South = 1 << 2,
-    West = 1 << 3
+    North       = 1 << 0, 
+    NorthEast   = 1 << 1,
+    East        = 1 << 2,
+    SouthEast   = 1 << 3,
+    South       = 1 << 4,
+    SouthWest   = 1 << 5,
+    West        = 1 << 6,
+    NorthWest   = 1 << 7
 }
 
 public static class TapDirectionsHelper
 {
-    public static TapDirections RotateCounterClockwise(this TapDirections helper)
+    public static TapDirections Opposite(this TapDirections helper)
     {
-        TapDirections rotatedDirections = 0;
-
-        if (helper.HasFlag(TapDirections.East))  rotatedDirections |= TapDirections.North;
-        if (helper.HasFlag(TapDirections.North)) rotatedDirections |= TapDirections.West;
-        if (helper.HasFlag(TapDirections.West))  rotatedDirections |= TapDirections.South;
-        if (helper.HasFlag(TapDirections.South)) rotatedDirections |= TapDirections.East;
-
-        helper = rotatedDirections;
-
-        return helper;
+        return (TapDirections)(((uint)helper >> 4) | ((uint)helper << 4));
     }
 
-    public static TapDirections RotateClockwise(this TapDirections helper)
+    public static TapDirections RotateCounterClockwise(this TapDirections helper, int Steps)
     {
-        TapDirections rotatedDirections = 0;
+        return (TapDirections)(((uint)helper >> Steps) | ((uint)helper << (8 - Steps)));
+    }
 
-        if (helper.HasFlag(TapDirections.North)) rotatedDirections |= TapDirections.East;
-        if (helper.HasFlag(TapDirections.West))  rotatedDirections |= TapDirections.North;
-        if (helper.HasFlag(TapDirections.South)) rotatedDirections |= TapDirections.West;
-        if (helper.HasFlag(TapDirections.East))  rotatedDirections |= TapDirections.South;
-
-        helper = rotatedDirections;
-
-        return helper;
+    public static TapDirections RotateClockwise(this TapDirections helper, int Steps)
+    {
+        return (TapDirections)(((uint)helper << Steps) | ((uint)helper >> (8 - Steps)));
     }
 }
 

@@ -25,21 +25,11 @@ public class TwistTile : MonoBehaviour
     private TwistTile West = null;
 
     private bool isRotating = false;
-
-    //public void SetDirections(TwistTile north, TwistTile east, TwistTile south, TwistTile west)
-    //{
-    //    North = north;
-    //    East = east;
-    //    South = south;
-    //    West = west;
-    //}
+    private bool isDragging = false;
+    private int ActiveDirection = 0;
 
     public void SetParams(Vector3Int pos, ITilemap map, TwistTilePiece piece)
     {
-        TilePosition = pos;
-        Tilemap = map;
-        TilePiece = piece;
-
         if (TwistMap.ContainsKey(pos))
         {
             TwistMap[pos] = this;
@@ -49,54 +39,16 @@ public class TwistTile : MonoBehaviour
             TwistMap.Add(pos, this);
         }
 
-        //Debug.Log($"params: {pos}");
+        TilePosition = pos;
     }
-
-    //TwistTilePiece tNorth;
-    //TwistTilePiece tEast;
-    //TwistTilePiece tSouth;
-    //TwistTilePiece tWest;
 
     public IEnumerator Start()
     {
         yield return new WaitForEndOfFrame();
 
         Vector3Int tempPos = new Vector3Int(1, 1, 0);
-        //Vector3Int tempPos = TilePosition;
-
-        //TwistTilePiece tThis = Tilemap.GetTile<TwistTilePiece>(TilePosition);
 
         TwistTilePiece tThis = TilePiece;
-
-        //TwistTilePiece tNorth = tThis.North;
-        //TwistTilePiece tEast = tThis.East;
-        //TwistTilePiece tSouth = tThis.South;
-        //TwistTilePiece tWest = tThis.West;
-
-        //TwistTilePiece tNorth = Tilemap.GetTile<TwistTilePiece>(TilePosition);
-        //TwistTilePiece tEast = Tilemap.GetTile<TwistTilePiece>(TilePosition);
-        //TwistTilePiece tSouth = Tilemap.GetTile<TwistTilePiece>(TilePosition);
-        //TwistTilePiece tWest = Tilemap.GetTile<TwistTilePiece>(TilePosition);
-
-        //TileData tNorth = new TileData(), tEast = new TileData(), tSouth = new TileData(), tWest = new TileData();
-
-        //TilePiece.GetTileData(TilePosition, Tilemap, ref tNorth);
-        //TilePiece.GetTileData(TilePosition, Tilemap, ref tEast);
-        //TilePiece.GetTileData(TilePosition, Tilemap, ref tSouth);
-        //TilePiece.GetTileData(TilePosition, Tilemap, ref tWest);
-
-        //SetDirections(
-        //    tNorth.<TwistTile>(),
-        //    tEast.gameObject.GetComponent<TwistTile>(),
-        //    tSouth.gameObject.GetComponent<TwistTile>(),
-        //    tWest.gameObject.GetComponent<TwistTile>()
-        //    );
-
-        //SetDirections(
-        //    tNorth == null ? null : tNorth.myTileObject,
-        //    tEast == null ? null : tEast.myTileObject,
-        //    tSouth == null ? null : tSouth.myTileObject,
-        //    tWest == null ? null : tWest.myTileObject);
 
         var tempKey = TilePosition + Vector3Int.up;
         North = TwistMap.ContainsKey(tempKey) ? TwistMap[tempKey] : null;
@@ -109,45 +61,6 @@ public class TwistTile : MonoBehaviour
 
         tempKey = TilePosition + Vector3Int.left;
         West = TwistMap.ContainsKey(tempKey) ? TwistMap[tempKey] : null;
-
-        //string me = $"({TilePosition.x}, {TilePosition.y})";
-
-        //string north = North ? $"{North.TilePosition.x}, {North.TilePosition.y}" : "null";
-        //string east = East ? $"{East.TilePosition.x}, {East.TilePosition.y}" : "null";
-        //string south = South ? $"{South.TilePosition.x}, {South.TilePosition.y})" : "null";
-        //string west = West ? $"{West.TilePosition.x}, {West.TilePosition.y}" : "null";
-
-        //string north = tNorth ? $"{tNorth.myPosition.x}, {tNorth.myPosition.y}" : "null";
-        //string east = tEast ? $"{tEast.myPosition.x}, {tEast.myPosition.y}" : "null";
-        //string south = tSouth ? $"{tSouth.myPosition.x}, {tSouth.myPosition.y})" : "null";
-        //string west = tWest ? $"{tWest.myPosition.x}, {tWest.myPosition.y}" : "null";
-
-        //if (PositionText)
-        //{
-        //    PositionText.text = ""; // $"{north}\n\n{west}{me}{east}\n\n{south}";
-        //    //Debug.Log($"fromPiece: {tThis.myPosition} | {me}\n\n{PositionText.text}");
-        //}
-    }
-
-    public void Rotate(int dir)
-    {
-        if (!isRotating && dir != 0)
-        {
-            TapDirections tapDir = Directions;
-
-            if (dir > 0)
-            {
-                Directions = Directions.RotateClockwise();
-                StartCoroutine(RotationAnimation(-90));
-            }
-            else
-            {
-                Directions = Directions.RotateCounterClockwise();
-                StartCoroutine(RotationAnimation(90));
-            }
-
-            isRotating = true;
-        }
     }
 
     public bool Has(TapDirections dir)
@@ -155,15 +68,65 @@ public class TwistTile : MonoBehaviour
         return Directions.HasFlag(dir);
     }
 
+    private Vector3 DownSpot = new Vector3();
+
     public void OnMouseDown()
     {
-        Rotate(1);
+        DownSpot = Input.mousePosition;
     }
 
-    //public void OnMouseOver()
-    //{
-    //    //Debug.Log(Directions.ToString());
-    //}
+    public void OnMouseDrag()
+    {
+        var dir = Input.mousePosition - DownSpot;
+        float threshhold = 50;
+
+        //Debug.Log($"dragMag: {dir.magnitude} | Direction: {Math.Sign(dir.x)}");
+
+        if (dir.magnitude != 0 && dir.magnitude > threshhold)
+        {
+            isDragging = true;
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            Debug.Log($"Angle: {angle}");
+            ActiveDirection =  Math.Sign(dir.x);
+        }
+    }
+
+    public void OnMouseUp()
+    {
+        if(isDragging)
+        {
+            Rotate(ActiveDirection);
+            isDragging = false;
+        }
+    }
+
+    public void Rotate(int dir)
+    {
+        var steps = 2;
+        var degrees = 45;
+        if (!isRotating && dir != 0)
+        {
+            TapDirections tapDir = Directions;
+
+            if (dir > 0)
+            {
+                Directions = Directions.RotateClockwise(steps);
+                StartCoroutine(RotationAnimation(-1 * steps * degrees));
+            }
+            else
+            {
+                Directions = Directions.RotateCounterClockwise(steps);
+                StartCoroutine(RotationAnimation(steps * degrees));
+            }
+
+            isRotating = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        
+    }
 
     private IEnumerator RotationAnimation(int degrees)
     {
@@ -179,9 +142,9 @@ public class TwistTile : MonoBehaviour
 
         TileGraphic.eulerAngles = new Vector3(0, 0, currentRotationZ + degrees);
 
-        TriggerCascade(-1 * Math.Sign(degrees));
-
         isRotating = false;
+
+        TriggerCascade(Math.Sign(degrees));
 
         yield return 0;
     }
