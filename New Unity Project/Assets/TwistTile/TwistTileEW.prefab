@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7408f86617f4f43a7a6f9e136c5fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Directions: 10
+  Directions: 68
   TilePosition: {x: 0, y: 0, z: 0}
   TileGraphic: {fileID: 2014342093032843238}
   PositionText: {fileID: 4957170280385819321}
