@@ -8,15 +8,16 @@ public class TileControllerPiece : Tile
 {
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
-        //if (go)
-        //{
-        //    var myTileObject = go.GetComponent<TileController>();
+        if (go)
+        {
+            var myTileObject = go.GetComponent<TileController>();
 
-        //    if (myTileObject)
-        //    {
-        //        myTileObject.SetParams(position, tilemap, this);
-        //    }
-        //}
+            if (myTileObject)
+            {
+                myTileObject.SetParams(position, tilemap, this);
+            }
+        }
+
         return true;
     }
 }
