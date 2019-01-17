@@ -124,6 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa1e9108fe3dd44489f80006388f7dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyTilePawn:
+    Cost: 0
+    Upkeep: 0
 --- !u!1 &8426569826344492466
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +137,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5885559716085110171}
   - component: {fileID: 5503048981069819671}
-  - component: {fileID: 2449244036932740879}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -204,15 +206,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2449244036932740879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8426569826344492466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf331e19aa99c4942873d9cf2769bb6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

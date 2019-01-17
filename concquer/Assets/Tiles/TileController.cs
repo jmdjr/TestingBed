@@ -14,7 +14,13 @@ public class TileController : MonoBehaviour
 
     TileController[] neighborTiles = new TileController[6];
 
-    Pawn MyTilePawn = null;
+    PawnDataTypes PawnTileDictionary = null;
+
+    [SerializeField]
+    PawnType MyTilePawn = PawnType.NONE;
+
+    [SerializeField]
+    StructureType MyTileBuilding = StructureType.NONE;
 
     public void SetParams(Vector3Int position, ITilemap tilemap, TileControllerPiece piece)
     {
@@ -34,7 +40,7 @@ public class TileController : MonoBehaviour
 
     public void Start()
     {
-        this.MapNeighbors();
+        MapNeighbors();
     }
 
     private void MapNeighbors()
@@ -62,6 +68,20 @@ public class TileController : MonoBehaviour
 
     public bool HasPawn()
     {
-        return MyTilePawn != null;
+        return MyTilePawn != PawnType.NONE;
     }
+
+    public bool HasBuilding()
+    {
+        return MyTileBuilding != StructureType.NONE;
+    }
+
+    public bool CanPlacePiece(PawnType pawn)
+    {
+        return (!HasBuilding() || pawn.CanBeat(MyTileBuilding)) && (!HasPawn() || pawn.CanBeat(MyTilePawn));
+    }
+    //public bool CanPlacePiece(StructureType structure)
+    //{
+    //    return !HasBuilding() && (!HasPawn() || MyTile)
+    //}
 }
