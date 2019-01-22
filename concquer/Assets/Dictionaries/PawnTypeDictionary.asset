@@ -14,17 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PawnTypes:
   - TypeName: NONE
+    SpriteImage: {fileID: 0}
     Cost: 0
     Upkeep: 0
   - TypeName: PAWN
-    Cost: 2
-    Upkeep: 10
+    SpriteImage: {fileID: 21300000, guid: 827f0b3c8bd1ba94b908ceb90170ac57, type: 3}
+    Cost: 10
+    Upkeep: 2
   - TypeName: BISHOP
-    Cost: 4
-    Upkeep: 20
+    SpriteImage: {fileID: 21300000, guid: 4073833b712095645b5cea04d1492e56, type: 3}
+    Cost: 20
+    Upkeep: 4
   - TypeName: KNIGHT
-    Cost: 6
-    Upkeep: 30
+    SpriteImage: {fileID: 21300000, guid: 98a60b8cf888f79489594f19e05f90b1, type: 3}
+    Cost: 30
+    Upkeep: 6
   - TypeName: KING
-    Cost: 8
-    Upkeep: 40
+    SpriteImage: {fileID: 0}
+    Cost: 40
+    Upkeep: 8

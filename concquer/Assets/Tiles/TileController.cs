@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,15 +13,30 @@ public class TileController : MonoBehaviour
     ITilemap MyTileMap;
     TileControllerPiece MyTilePiece;
 
-    TileController[] neighborTiles = new TileController[6];
+    public static void ClearReferencesMap()
+    {
+        HexTileMap.Clear();
+    }
 
+    TileController[] neighborTiles = new TileController[HexTileDirection.Size.Id()];
+
+    [SerializeField]
     PawnDataTypes PawnTileDictionary = null;
+
+    [SerializeField]
+    SpriteRenderer PieceRenderer = null;
+
+    [SerializeField]
+    SpriteRenderer TileRenderer = null;
 
     [SerializeField]
     PawnType MyTilePawn = PawnType.NONE;
 
     [SerializeField]
     StructureType MyTileBuilding = StructureType.NONE;
+
+    [Header("Debug Data")]
+    public TextMeshPro[] Displays = new TextMeshPro[HexTileDirection.Size.Id()];
 
     public void SetParams(Vector3Int position, ITilemap tilemap, TileControllerPiece piece)
     {
@@ -38,6 +54,11 @@ public class TileController : MonoBehaviour
         }
     }
 
+    public Vector3Int GetTilePosition()
+    {
+        return MyTilePosition;
+    }
+
     public void Start()
     {
         MapNeighbors();
@@ -45,25 +66,32 @@ public class TileController : MonoBehaviour
 
     private void MapNeighbors()
     {
-        Vector3Int tempKey = Vector3Int.zero;
+        MapDirection(HexTileDirection.RightTop.Id(), MyTilePosition + Vector3Int.up);
+        MapDirection(HexTileDirection.RightMiddle.Id(), MyTilePosition + Vector3Int.right);
+        MapDirection(HexTileDirection.RightBottom.Id(), MyTilePosition + Vector3Int.down);
+        MapDirection(HexTileDirection.LeftBottom.Id(), MyTilePosition + Vector3Int.down + Vector3Int.left);
+        MapDirection(HexTileDirection.LeftMiddle.Id(), MyTilePosition + Vector3Int.left);
+        MapDirection(HexTileDirection.LeftTop.Id(), MyTilePosition + Vector3Int.up + Vector3Int.left);
+    }
 
-        tempKey = MyTilePosition + Vector3Int.up;
-        neighborTiles[0] = HexTileMap.ContainsKey(tempKey) ? HexTileMap[tempKey] : null;
+    private TileController MapDirection(int direction, Vector3Int tempKey)
+    {
+        TileController Sampler = neighborTiles[direction] = HexTileMap.ContainsKey(tempKey) ? HexTileMap[tempKey] : null;
 
-        tempKey = MyTilePosition + Vector3Int.right;
-        neighborTiles[1] = HexTileMap.ContainsKey(tempKey) ? HexTileMap[tempKey] : null;
+        if (Displays.Length > direction && Displays[direction] != null)
+        {
+            Displays[direction].text = (Sampler != null ? "T" : "F");
+        }
 
-        tempKey = MyTilePosition + Vector3Int.down;
-        neighborTiles[2] = HexTileMap.ContainsKey(tempKey) ? HexTileMap[tempKey] : null;
+        return Sampler;
+    }
 
-        tempKey = MyTilePosition + Vector3Int.down + Vector3Int.left;
-        neighborTiles[3] = HexTileMap.ContainsKey(tempKey) ? HexTileMap[tempKey] : null;
+    public void PlacePawn(PawnType pawn)
+    {
+        PawnData data = PawnTileDictionary.GetPawnData(pawn);
 
-        tempKey = MyTilePosition + Vector3Int.left;
-        neighborTiles[4] = HexTileMap.ContainsKey(tempKey) ? HexTileMap[tempKey] : null;
-
-        tempKey = MyTilePosition + Vector3Int.up + Vector3Int.left;
-        neighborTiles[5] = HexTileMap.ContainsKey(tempKey) ? HexTileMap[tempKey] : null;
+        PieceRenderer.sprite = data.SpriteImage;
+        MyTilePawn = pawn;
     }
 
     public bool HasPawn()
@@ -76,12 +104,8 @@ public class TileController : MonoBehaviour
         return MyTileBuilding != StructureType.NONE;
     }
 
-    public bool CanPlacePiece(PawnType pawn)
-    {
-        return (!HasBuilding() || pawn.CanBeat(MyTileBuilding)) && (!HasPawn() || pawn.CanBeat(MyTilePawn));
-    }
-    //public bool CanPlacePiece(StructureType structure)
+    //public bool CanPlacePiece(PawnType pawn)
     //{
-    //    return !HasBuilding() && (!HasPawn() || MyTile)
+    //    return (!HasBuilding() || pawn.CanBeat(MyTileBuilding)) && (!HasPawn() || pawn.CanBeat(MyTilePawn));
     //}
 }

@@ -76,6 +76,6 @@ public class GameLiftServerExample : MonoBehaviour
     {
         //Make sure to call GameLiftServerAPI.Destroy() when the application quits. 
         //This resets the local connection with GameLift's agent.
-        GameLiftServerAPI.Destroy();
+        //GameLiftServerAPI.Destroy();
     }
 }

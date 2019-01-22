@@ -10,6 +10,11 @@ public class PawnDataTypes : ScriptableObject
 {
     public PawnData[] PawnTypes = new PawnData[(int)PawnType.SIZE];
 
+    public PawnData GetPawnData(PawnType pawn)
+    {
+        return PawnTypes[(int)pawn];
+    }
+
     public void Awake()
     {
         for(int n = 0; n < (int)PawnType.SIZE; ++n)

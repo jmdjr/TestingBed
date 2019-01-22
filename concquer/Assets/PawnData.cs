@@ -14,10 +14,16 @@ public class PawnData
 
     [SerializeField]
     public string TypeName;
+
+    [SerializeField]
+    public Sprite SpriteImage;
+
     [SerializeField]
     public PawnType Type { get; private set; }
+
     [SerializeField]
     private int Cost;
+
     [SerializeField]
     private int Upkeep;
 }

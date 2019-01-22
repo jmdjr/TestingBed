@@ -1,0 +1,9 @@
+version: 2
+importPivots: 1
+tpsheetFileNames:
+- Assets/Tiles/TileSheet.tpsheet
+textureFileNames:
+- Assets/Tiles/TileSheet.png
+normalmapFileNames:
+- 
+enableDebugOutput: 0
