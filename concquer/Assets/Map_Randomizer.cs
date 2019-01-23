@@ -56,7 +56,6 @@ public class Map_Randomizer : MonoBehaviour
         StartCoroutine(IslandMethodRoutine());
     }
 
-
     private IEnumerator IslandMethodRoutine()
     {
         IslandGroups.Clear();
@@ -87,14 +86,61 @@ public class Map_Randomizer : MonoBehaviour
         StartCoroutine(IslandMethodRoutine());
     }
 
-
-
     private void ClearOldGeneratedMap()
     {
         TileMap.ClearAllTiles();
         TileController.ClearReferencesMap();
     }
 
+    private void initializeMapOfLand()
+    {
+        OldMap = new bool[Width, Height];
+        for (int x = 0; x < Width; ++x)
+        {
+            for (int y = 0; y < Height; ++y)
+            {
+                OldMap[x, y] = SLUtility.Random.Chance(randomChance);
+            }
+        }
+    }
+    
+    private void initializeMapOfLand_IslandCount()
+    {
+        OldMap = new bool[Width, Height];
+
+        int islandCount = 0;
+        int halfHalfWidth = halfWidth / 2;
+        int halfHalfHeight = halfHeight / 2;
+
+        // making sure 0x0 is always there... keep it centered
+        OldMap[0, 0] = true;
+        List<Vector2Int> islandList = new List<Vector2Int>();
+        islandList.Add(new Vector2Int(halfWidth, halfHeight));
+        IslandGroups.Add(islandList);
+        islandCount += 1;
+
+        for (int x = halfHalfWidth; x < (Width); ++x)
+        {
+            for (int y = halfHalfHeight; y < (Height); ++y)
+            {
+                if(islandCount < MaxIslandCount && SLUtility.Random.Chance(randomChance))
+                {
+                    OldMap[x, y] = true;
+
+                    islandList = new List<Vector2Int>();
+                    islandList.Add(new Vector2Int(x, y));
+                    IslandGroups.Add(islandList);
+
+                    islandCount += 1;
+                }
+                else
+                {
+                    OldMap[x, y] = false;
+                }
+            }
+        }
+    }
+    
     private void IterateOldMap()
     {
         for (int i = 0; i < Iterations; ++i)
@@ -125,49 +171,6 @@ public class Map_Randomizer : MonoBehaviour
             else
             {
                 break;
-            }
-        }
-    }
-
-    private void initializeMapOfLand()
-    {
-        OldMap = new bool[Width, Height];
-        for (int x = 0; x < Width; ++x)
-        {
-            for (int y = 0; y < Height; ++y)
-            {
-                OldMap[x, y] = SLUtility.Random.Chance(randomChance);
-            }
-        }
-    }
-    
-    private void initializeMapOfLand_IslandCount()
-    {
-        OldMap = new bool[Width, Height];
-
-        int islandCount = 0;
-        int halfHalfWidth = halfWidth / 2;
-        int halfHalfHeight = halfHeight / 2;
-
-        for (int x = halfHalfWidth; x < (Width); ++x)
-        {
-            for (int y = halfHalfHeight; y < (Height); ++y)
-            {
-                if(islandCount < MaxIslandCount && SLUtility.Random.Chance(randomChance))
-                {
-                    OldMap[x, y] = true;
-
-                    List<Vector2Int> islandList = new List<Vector2Int>();
-                    islandList.Add(new Vector2Int(x, y));
-                    IslandGroups.Add(islandList);
-
-                    islandCount += 1;
-                }
-                else
-                {
-                    OldMap[x, y] = false;
-                }
-
             }
         }
     }

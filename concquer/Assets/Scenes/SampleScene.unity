@@ -164,7 +164,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 15.266772
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -435,11 +435,11 @@ MonoBehaviour:
   Height: 25
   Width: 37
   randomChance: 0.05
-  MaxIslandCount: 5
+  MaxIslandCount: 3
   DeathLimit: 2
   BirthLimit: 4
   randomIslandChance: 0.1
-  Iterations: 10
+  Iterations: 15
   TimeDelay: 1
   TileMap: {fileID: 1001939454}
   BaseTile: {fileID: 11400000, guid: 7272dbfdcc92f7b408051e94912032e3, type: 2}
