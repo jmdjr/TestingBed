@@ -433,12 +433,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Height: 25
-  Width: 25
-  randomChance: 0.5
-  MinIslandCount: 5
+  Width: 37
+  randomChance: 0.05
+  MaxIslandCount: 5
   DeathLimit: 2
   BirthLimit: 4
-  Iterations: 100
+  randomIslandChance: 0.1
+  Iterations: 10
   TimeDelay: 1
   TileMap: {fileID: 1001939454}
   BaseTile: {fileID: 11400000, guid: 7272dbfdcc92f7b408051e94912032e3, type: 2}
