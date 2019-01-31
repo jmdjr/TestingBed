@@ -18,18 +18,18 @@ MonoBehaviour:
     Cost: 0
     Upkeep: 0
   - TypeName: PAWN
-    SpriteImage: {fileID: 21300000, guid: 827f0b3c8bd1ba94b908ceb90170ac57, type: 3}
+    SpriteImage: {fileID: 21300012, guid: 8a912d889e9ff1045a0eb16639bc95bd, type: 3}
     Cost: 10
     Upkeep: 2
   - TypeName: BISHOP
-    SpriteImage: {fileID: 21300000, guid: 4073833b712095645b5cea04d1492e56, type: 3}
+    SpriteImage: {fileID: 21300002, guid: 8a912d889e9ff1045a0eb16639bc95bd, type: 3}
     Cost: 20
     Upkeep: 4
   - TypeName: KNIGHT
-    SpriteImage: {fileID: 21300000, guid: 98a60b8cf888f79489594f19e05f90b1, type: 3}
+    SpriteImage: {fileID: 21300010, guid: 8a912d889e9ff1045a0eb16639bc95bd, type: 3}
     Cost: 30
     Upkeep: 6
   - TypeName: KING
-    SpriteImage: {fileID: 0}
+    SpriteImage: {fileID: 21300008, guid: 8a912d889e9ff1045a0eb16639bc95bd, type: 3}
     Cost: 40
     Upkeep: 8

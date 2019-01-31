@@ -6,10 +6,14 @@ using UnityEngine.Tilemaps;
 
 public class Map_Randomizer : MonoBehaviour
 {
+    public static int GenerationSeed { get; internal set; }
+
     private List<List<Vector2Int>> IslandGroups;
 
     public int Height = 25;
     public int Width = 25;
+
+    public int startSeed = 0;
 
     [Range(0, 1)]
     public float randomChance = 0.45f;
@@ -36,9 +40,14 @@ public class Map_Randomizer : MonoBehaviour
         halfWidth = Width / 2;
         halfHeight = Height / 2;
 
-        IslandGroups = new List<List<Vector2Int>>();
+        if(startSeed != 0)
+        {
+            Random.InitState(startSeed);
+            GenerationSeed = startSeed;
+        }
 
-        StartCoroutine(Routine());
+        IslandGroups = new List<List<Vector2Int>>();
+        StartCoroutine(IslandMethodRoutine());
     }
 
     private IEnumerator Routine()
@@ -52,8 +61,6 @@ public class Map_Randomizer : MonoBehaviour
         GenerateMapOfLandTiles();
 
         yield return new WaitForSeconds(TimeDelay);
-
-        StartCoroutine(IslandMethodRoutine());
     }
 
     private IEnumerator IslandMethodRoutine()
@@ -68,22 +75,16 @@ public class Map_Randomizer : MonoBehaviour
         {
             bool[,] newMap = SimulateMapStep_IslandCount();
 
-            if (OldMap != newMap)
-            {
-                ClearOldGeneratedMap();
-                OldMap = newMap;
-                GenerateMapOfLandTiles();
-                yield return new WaitForSeconds(0.25f);
-            }
-            else
-            {
-                break;
-            }
+            //ClearOldGeneratedMap();
+            OldMap = newMap;
+            //GenerateMapOfLandTiles();
+            //yield return new WaitForSeconds(0.25f);
         }
 
+        GenerateMapOfLandTiles();
         yield return new WaitForSeconds(TimeDelay);
 
-        StartCoroutine(IslandMethodRoutine());
+        //StartCoroutine(IslandMethodRoutine());
     }
 
     private void ClearOldGeneratedMap()
@@ -95,6 +96,9 @@ public class Map_Randomizer : MonoBehaviour
     private void initializeMapOfLand()
     {
         OldMap = new bool[Width, Height];
+
+        GenerationSeed = Random.seed;
+
         for (int x = 0; x < Width; ++x)
         {
             for (int y = 0; y < Height; ++y)
@@ -113,11 +117,13 @@ public class Map_Randomizer : MonoBehaviour
         int halfHalfHeight = halfHeight / 2;
 
         // making sure 0x0 is always there... keep it centered
-        OldMap[0, 0] = true;
+        OldMap[halfWidth, halfHeight] = true;
         List<Vector2Int> islandList = new List<Vector2Int>();
         islandList.Add(new Vector2Int(halfWidth, halfHeight));
         IslandGroups.Add(islandList);
         islandCount += 1;
+
+        GenerationSeed = Random.seed;
 
         for (int x = halfHalfWidth; x < (Width); ++x)
         {
@@ -201,7 +207,7 @@ public class Map_Randomizer : MonoBehaviour
 
     private bool[,] SimulateMapStep_IslandCount()
     {
-        bool[,] newMap = new bool[Width, Height];
+        //bool[,] newMap = (bool[,])OldMap.Clone();
 
         for (int a = 0; a < IslandGroups.Count; ++a)
         {
@@ -211,26 +217,36 @@ public class Map_Randomizer : MonoBehaviour
             for (int b = 0; b < island.Count; ++b)
             {
                 Vector2Int islandChunk = island[b];
-                newMap[islandChunk.x, islandChunk.y] = true;
+                OldMap[islandChunk.x, islandChunk.y] = true;
 
                 List<Vector2Int> available = AliveNeighbours_Sides(islandChunk.x, islandChunk.y);
 
                 if(available.Count >= 2)
                 {
-                    Vector2Int newChunk = available.RandomOne();
+                    //Vector2Int newChunk = available.RandomOne();
+                    Vector2Int[] newChunks = available.RandomMany(2).ToArray();
 
-                    if (!PointOnOtherIslands(new Vector2Int(newChunk.x, newChunk.y), a))
+                    //if (!PointOnOtherIslands(new Vector2Int(newChunk.x, newChunk.y), a))
+                    //{
+                    //    newPositions.Add(newChunk);
+                    //    newMap[newChunk.x, newChunk.y] = true;
+                    //}
+
+                    foreach (var newChunk in newChunks)
                     {
-                        newPositions.Add(newChunk);
-                        newMap[newChunk.x, newChunk.y] = true;
+                        //if (!PointOnOtherIslands(new Vector2Int(newChunk.x, newChunk.y), a))
+                        //{
+                            newPositions.Add(newChunk);
+                            OldMap[newChunk.x, newChunk.y] = true;
+                        //}
                     }
                 }
             }
 
-            IslandGroups[a].AddRange(newPositions);
+            IslandGroups[a] = newPositions;
         }
 
-        return newMap;
+        return OldMap;
     }
 
     private bool PointOnOtherIslands(Vector2Int point, int islandIndex)
@@ -330,7 +346,6 @@ public class Map_Randomizer : MonoBehaviour
         return sidePoints;
     }
 
-
     // running around the perimeter
     private int AliveNeighboursCount(int x, int y)
     {
@@ -384,6 +399,4 @@ public class Map_Randomizer : MonoBehaviour
 
         return count;
     }
-
-
 }
