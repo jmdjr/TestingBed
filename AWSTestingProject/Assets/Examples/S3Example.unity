@@ -771,11 +771,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa7de8866404054591507da4f1293de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IdentityPoolId: us-west-2:33bae056-eb59-4a8c-a130-d02fa4f110b9
+  IdentityPoolId: us-west-2:6b3f63bf-6138-489d-af25-ee1fd6b76b50
   CognitoIdentityRegion: us-west-2
   S3Region: us-west-2
   S3BucketName: s3-testingpeeps-bucket
-  SampleFileName: s3-sample-file.txt
+  SampleFileName: 
   GetBucketListButton: {fileID: 1441414886}
   PostBucketButton: {fileID: 408278450}
   GetObjectsListButton: {fileID: 496104062}
