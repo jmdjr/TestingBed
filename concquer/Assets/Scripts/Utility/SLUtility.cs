@@ -139,6 +139,16 @@ public static partial class SLUtility
     #region public static class Random ...
     public static class Random
     {
+        private static void SetSeed(int newSeed)
+        {
+            UnityEngine.Random.InitState(newSeed);
+        }
+
+        private static int GetSeed()
+        {
+            return UnityEngine.Random.STAT;
+        }
+
         public struct ChanceCase
         {
             public bool success;
