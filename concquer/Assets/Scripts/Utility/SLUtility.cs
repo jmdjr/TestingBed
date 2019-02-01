@@ -146,7 +146,7 @@ public static partial class SLUtility
 
         private static int GetSeed()
         {
-            return UnityEngine.Random.STAT;
+            return UnityEngine.Random.seed;
         }
 
         public struct ChanceCase

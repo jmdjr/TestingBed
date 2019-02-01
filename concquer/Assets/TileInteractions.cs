@@ -8,6 +8,7 @@ public class TileInteractions : MonoBehaviour
 
     private void OnMouseDown()
     {
+        Debug.Log("TileTouch");
         if(!Controller.HasPawn())
         {
             Controller.PlacePawn(PawnType.PAWN);
