@@ -87,7 +87,7 @@ MonoBehaviour:
       Enabled: 0
       development: 1
     GameCenter:
-      Enabled: 1
+      Enabled: 0
     Wallet:
       Enabled: 0
       passSubset: []
@@ -97,7 +97,7 @@ MonoBehaviour:
       Enabled: 0
       merchants: []
     InAppPurchase:
-      Enabled: 1
+      Enabled: 0
     Maps:
       Enabled: 0
       options: 

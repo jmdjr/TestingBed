@@ -21,10 +21,10 @@ MonoBehaviour:
     Error: 1
   WTFLogging: 0
   PreferredImagesStorage: 1
-  Vending: 1
+  Vending: 0
   Contacts: 0
   Social: 0
-  GooglePlay: 1
+  GooglePlay: 0
   CameraAndGallery: 0
   MediaPlayer: 0
   LocalNotifications: 0
