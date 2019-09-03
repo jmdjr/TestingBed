@@ -1,25 +1,47 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class TouchController : MonoBehaviour
 {
-    List<List<Vector3>> SymbolShapes = new List<List<Vector3>>();
+    public static TouchController Instance { get; private set; } = null;
 
-    List<Vector3> SymbolShape = new List<Vector3>();
+    public void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        SymbolShapes = SLUtility.IO.Load<List<SymbolShape>>("Test", FileParsingFlags.JSON, true);
+
+        if (SymbolShapes == null)
+        {
+            SymbolShapes = new List<SymbolShape>();
+        }
+
+        TotalSymbols = SymbolShapes.Count;
+    }
+
+    List<SymbolShape> SymbolShapes = new List<SymbolShape>();
+
+    public int TotalSymbols { get; private set; } = 0;
+
+    List<Vector3> shape = new List<Vector3>();
     bool isRecording = false;
     public LineRenderer LineRender;
 
     // Start is called before the first frame update
     void Start()
     {
-        SymbolShapes = SLUtility.IO.Load<List<List<Vector3>>>("Test", FileParsingFlags.JSON, true);
-
-        if(SymbolShapes == null)
-        {
-            SymbolShapes = new List<List<Vector3>>();
-        }
 
         StartRecording();
     }
@@ -30,20 +52,24 @@ public class TouchController : MonoBehaviour
         if (isRecording)
         {
             Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
             position.z = transform.position.z;
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
             {
-                if(SymbolShape.Count() == 0 || SymbolShape.Last() != position)
+                if(shape.Count() == 0 || shape.Last() != position)
                 {
-                    SymbolShape.Add(position);
-                    LineRender.positionCount = SymbolShape.Count();
-                    LineRender.SetPositions(SymbolShape.ToArray());
+                    shape.Add(position);
+                    LineRender.positionCount = shape.Count();
+                    LineRender.SetPositions(shape.ToArray());
                 }
             }
-            else if(SymbolShape.Count > 1)
+            else if(shape.Count > 1)
             {
                 StopRecording();
-                SymbolShapes.Add(SymbolShape);
+                var symbol = new SymbolShape();
+                symbol.SetPoints(shape);
+                SymbolShapes.Add(symbol);
+
                 SLUtility.IO.Save(SymbolShapes, "Test", FileParsingFlags.JSON);
             }
         }
@@ -61,6 +87,34 @@ public class TouchController : MonoBehaviour
 
     public void AddNewDraw()
     {
+
+    }
+
+    public void DrawLoadedShape(int index)
+    {
+        if(SymbolShapes.Count <= 0 || index >= SymbolShapes.Count)
+        {
+            return;
+        }
+    }
+}
+
+[Serializable]
+public class SymbolShape
+{
+    [JsonProperty]
+    List<Vector3> shapePoints = new List<Vector3>();
+
+    public void SetPoints(List<Vector3> points)
+    {
+        shapePoints = points;
+        NormalizeShape();
+    }
+
+    private void NormalizeShape()
+    {
+        Vector3 Min = Vector3.zero;
+        Vector3 Max = Vector3.zero;
 
     }
 }

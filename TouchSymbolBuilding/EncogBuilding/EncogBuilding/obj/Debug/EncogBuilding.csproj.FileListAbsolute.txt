@@ -109,3 +109,4 @@ D:\Github\TestingBed\TouchSymbolBuilding\EncogBuilding\EncogBuilding\obj\Debug\E
 D:\Github\TestingBed\TouchSymbolBuilding\EncogBuilding\EncogBuilding\obj\Debug\EncogBuilding.csproj.CopyComplete
 D:\Github\TestingBed\TouchSymbolBuilding\EncogBuilding\EncogBuilding\obj\Debug\EncogBuilding.exe
 D:\Github\TestingBed\TouchSymbolBuilding\EncogBuilding\EncogBuilding\obj\Debug\EncogBuilding.pdb
+D:\Github\TestingBed\TouchSymbolBuilding\EncogBuilding\EncogBuilding\bin\Debug\encog-core-cs.dll
